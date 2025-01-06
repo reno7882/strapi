@@ -28,9 +28,9 @@ jobs:
       - name: SSH to server and deploy
         uses: appleboy/ssh-action@v0.1.5
         with:
-          host: 157.173.210.105  # IP del servidor
-          username: github-user  # Usuario del servidor
-          key: b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZWQyNTUxOQAAACDp11wwsMFg2wWNHBXEHfJhwwTyUt7F+1cKaqCXRzABugAAAKjzxDJ+88QyfgAAAAtzc2gtZWQyNTUxOQAAACDp11wwsMFg2wWNHBXEHfJhwwTyUt7F+1cKaqCXRzABugAAAEBAS9s+DE/Xil0JHwzb47SJkQ5UnsB3iZA6tSLSJXiOBenXXDCwwWDbBY0cFcQd8mHDBPJS3sX7VwpqoJdHMAG6AAAAI0NsYXZlIHBhcmEgR2l0SHViIEFjdGlvbnMgc2luIGZyYXNlAQI=  # Clave privada para SSH
+          host: ${{ secrets.SERVER_IP }}  # IP del servidor
+          username: ${{ secrets.SERVER_USER }}  # Usuario del servidor
+          key: ${{ secrets.SSH_PRIVATE_KEY }}  # Clave privada para SSH
           port: 2225  # Aquí definimos el puerto 2225 en lugar del puerto 22
           script: |
             cd /home/reno7882/proyectos/strapi  # Carpeta en el servidor
