@@ -1,6 +1,6 @@
 {
   "global": {
-    "siteName": "reneceron desde cero",
+    "siteName": "reneceron",
     "defaultSeo": {
       "metaTitle": "Page",
       "metaDescription": "A blog made with Strapi",
