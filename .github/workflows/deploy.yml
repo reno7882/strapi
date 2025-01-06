@@ -23,7 +23,7 @@ jobs:
 
       - name: Build project
         run: |
-          npm run build
+          npm run build  # Este paso debe ser ejecutado en el servidor, si no se ha hecho antes
 
       - name: SSH to server and deploy
         uses: appleboy/ssh-action@v0.1.5
@@ -36,6 +36,7 @@ jobs:
             cd /home/reno7882/proyectos/strapi  # Carpeta en el servidor
             git pull origin main  # Hacer pull de la rama main
             npm install  # Instalar dependencias
+            npm run build  # Ejecutar build para generar la carpeta dist
             pm2 restart strapi-app  # Reiniciar la aplicación Strapi
             
             # Exportar variables de entorno para Strapi
