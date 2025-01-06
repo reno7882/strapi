@@ -1,8 +1,31 @@
+// config/middlewares.ts
+
 export default [
   'strapi::logger',
   'strapi::errors',
-  'strapi::security',
-  'strapi::cors',
+  {
+    name: 'strapi::security',
+    config: {
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          'connect-src': ["'self'", 'https:'],
+          'img-src': ["'self'", 'data:', 'blob:', 'res.cloudinary.com'],
+          'media-src': ["'self'", 'data:', 'blob:', 'res.cloudinary.com'],
+          upgradeInsecureRequests: null,
+        },
+      },
+    },
+  },
+  {
+    name: 'strapi::cors',
+    config: {
+      origin: ['http://localhost:3000', 'http://localhost:1337'],  // Orígenes permitidos
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],       // Métodos permitidos
+      allowedHeaders: ['Content-Type', 'Authorization', 'Accept'], // Encabezados permitidos
+      credentials: true,  // Permite el uso de cookies si es necesario
+    },
+  },
   'strapi::poweredBy',
   'strapi::query',
   'strapi::body',

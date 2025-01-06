@@ -6,7 +6,7 @@ export default ({ env }) => {
   const connections = {
     mysql: {
       connection: {
-        host: env('DATABASE_HOST', 'dpg-ctiaah5ds78s73beikl0-a.oregon-postgres.render.com'),
+        host: env('DATABASE_HOST', 'localhost'),
         port: env.int('DATABASE_PORT', 3306),
         database: env('DATABASE_NAME', 'strapi_gxzt'),
         user: env('DATABASE_USERNAME', 'reno7882'),
@@ -25,11 +25,11 @@ export default ({ env }) => {
     postgres: {
       connection: {
         connectionString: env('DATABASE_URL'),
-        host: env('DATABASE_HOST', 'dpg-ctiaah5ds78s73beikl0-a.oregon-postgres.render.com'),
+        host: env('DATABASE_HOST', 'localhost'),
         port: env.int('DATABASE_PORT', 5432),
-        database: env('DATABASE_NAME', 'strapi_gxzt'),
+        database: env('DATABASE_NAME', 'strapi'),
         user: env('DATABASE_USERNAME', 'reno7882'),
-        password: env('DATABASE_PASSWORD', 'Yfli1xRW1ClIGljCWjild0JpXD62gCs7'),
+        password: env('DATABASE_PASSWORD', '@Reno7882'),
         ssl: env.bool('DATABASE_SSL', false) && {
           key: env('DATABASE_SSL_KEY', undefined),
           cert: env('DATABASE_SSL_CERT', undefined),

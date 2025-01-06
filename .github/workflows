@@ -1,0 +1,58 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main  # Desplegar cuando se haga push a la rama main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Build project
+        run: |
+          npm run build
+
+      - name: SSH to server and deploy
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.SERVER_IP }}  # IP del servidor
+          username: ${{ secrets.SERVER_USER }}  # Usuario del servidor
+          key: ${{ secrets.SSH_PRIVATE_KEY }}  # Clave privada para SSH
+          script: |
+            cd /home/reno7882/proyectos/strapi  # Carpeta en el servidor
+            git pull origin main  # Hacer pull de la rama main
+            npm install  # Instalar dependencias
+            pm2 restart strapi-app  # Reiniciar la aplicación Strapi
+            
+            # Exportar variables de entorno para Strapi
+            export HOST=${{ secrets.HOST }}
+            export PORT=${{ secrets.PORT }}
+            export DATABASE_HOST=${{ secrets.DATABASE_HOST }}
+            export DATABASE_PORT=${{ secrets.DATABASE_PORT }}
+            export DATABASE_NAME=${{ secrets.DATABASE_NAME }}
+            export DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}
+            export DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
+            export JWT_SECRET=${{ secrets.JWT_SECRET }}
+            export APP_KEYS=${{ secrets.APP_KEYS }}
+            export API_TOKEN_SALT=${{ secrets.API_TOKEN_SALT }}
+            export ADMIN_JWT_SECRET=${{ secrets.ADMIN_JWT_SECRET }}
+            export TRANSFER_TOKEN_SALT=${{ secrets.TRANSFER_TOKEN_SALT }}
+            export CLOUDINARY_NAME=${{ secrets.CLOUDINARY_NAME }}
+            export CLOUDINARY_KEY=${{ secrets.CLOUDINARY_KEY }}
+            export CLOUDINARY_SECRET=${{ secrets.CLOUDINARY_SECRET }}
+            
+            # Reiniciar la aplicación Strapi con las nuevas variables de entorno
+            pm2 restart strapi-app
