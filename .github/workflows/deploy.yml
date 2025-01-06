@@ -31,6 +31,7 @@ jobs:
           host: ${{ secrets.SERVER_IP }}  # IP del servidor
           username: ${{ secrets.SERVER_USER }}  # Usuario del servidor
           key: ${{ secrets.SSH_PRIVATE_KEY }}  # Clave privada para SSH
+          port: 2225  # Aquí definimos el puerto 2225 en lugar del puerto 22
           script: |
             cd /home/reno7882/proyectos/strapi  # Carpeta en el servidor
             git pull origin main  # Hacer pull de la rama main
