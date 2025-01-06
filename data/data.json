@@ -1,6 +1,6 @@
 {
   "global": {
-    "siteName": "reneceron admin",
+    "siteName": "reneceron",
     "defaultSeo": {
       "metaTitle": "Page",
       "metaDescription": "A blog made with Strapi",
