@@ -39,4 +39,4 @@ jobs:
             npm run build  # Ejecutar build para generar la carpeta dist
             
             # Reiniciar la aplicación Strapi con las nuevas variables de entorno
-            ppm2 status strapi-app || echo "Error al reiniciar Strapi"
+            pm2 status strapi-app || echo "Error al reiniciar Strapi"
