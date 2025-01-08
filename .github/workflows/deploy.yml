@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -37,24 +37,6 @@ jobs:
             git pull origin main  # Hacer pull de la rama main
             npm install  # Instalar dependencias
             npm run build  # Ejecutar build para generar la carpeta dist
-            pm2 restart strapi-app  # Reiniciar la aplicación Strapi
-            
-            # Exportar variables de entorno para Strapi
-            export HOST=${{ secrets.HOST }}
-            export PORT=${{ secrets.PORT }}
-            export DATABASE_HOST=${{ secrets.DATABASE_HOST }}
-            export DATABASE_PORT=${{ secrets.DATABASE_PORT }}
-            export DATABASE_NAME=${{ secrets.DATABASE_NAME }}
-            export DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}
-            export DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
-            export JWT_SECRET=${{ secrets.JWT_SECRET }}
-            export APP_KEYS=${{ secrets.APP_KEYS }}
-            export API_TOKEN_SALT=${{ secrets.API_TOKEN_SALT }}
-            export ADMIN_JWT_SECRET=${{ secrets.ADMIN_JWT_SECRET }}
-            export TRANSFER_TOKEN_SALT=${{ secrets.TRANSFER_TOKEN_SALT }}
-            export CLOUDINARY_NAME=${{ secrets.CLOUDINARY_NAME }}
-            export CLOUDINARY_KEY=${{ secrets.CLOUDINARY_KEY }}
-            export CLOUDINARY_SECRET=${{ secrets.CLOUDINARY_SECRET }}
             
             # Reiniciar la aplicación Strapi con las nuevas variables de entorno
-            pm2 restart strapi-app
+            ppm2 status strapi-app || echo "Error al reiniciar Strapi"
