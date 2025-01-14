@@ -10,8 +10,8 @@ export default [
         useDefaults: true,
         directives: {
           'connect-src': ["'self'", 'https:'],
-          'img-src': ["'self'", 'data:', 'blob:', 'res.cloudinary.com', 'https://market-assets.strapi.io'], // Aquí añadimos https://market-assets.strapi.io
-          'media-src': ["'self'", 'data:', 'blob:', 'res.cloudinary.com'],
+          'img-src': ["'self'", 'data:', 'blob:', 'https://market-assets.strapi.io'],
+          'media-src': ["'self'", 'data:', 'blob:'],
           upgradeInsecureRequests: null,
         },
       },

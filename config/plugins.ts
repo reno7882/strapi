@@ -10,27 +10,10 @@ export default ({ env }) => ({
     },
     upload: {
         config: {
-            provider: 'cloudinary', // Usamos Cloudinary por defecto
-            providerOptions: {
-                cloud_name: env('CLOUDINARY_NAME'),
-                api_key: env('CLOUDINARY_KEY'),
-                api_secret: env('CLOUDINARY_SECRET'),
-            },
+            provider: 'local', // Usamos el proveedor local para todo
             actionOptions: {
                 upload: {},
                 delete: {},
-            },
-        },
-    },
-    // Puedes crear una configuración especial para el blog
-    'content-type-builder': {
-        models: {
-            article: {
-                pluginOptions: {
-                    upload: {
-                        provider: 'local', // Usamos el proveedor local solo para artículos del blog
-                    },
-                },
             },
         },
     },
